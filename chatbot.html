@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechEDU bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chatbot-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-area {
+      flex: 1;
+      overflow-y: scroll;
+      padding: 20px;
+    }
+
+    .chat-message {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+
+    .chat-message.bot {
+      background-color: #28a745;
+    }
+
+    .user-input {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .user-input input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .user-input button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .user-input button:hover {
+      background-color: #0056b3;
+    }
+
+    .question-link {
+      color: #007bff;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="chatbot-container" id="chatbotContainer">
+    <div class="chat-area" id="chatArea">
+      <div class="chat-message bot">Hello! How can I assist you?</div>
+      <div class="chat-message bot">
+        want to know about techedu?
+        <br>
+        <span class="question-link">What is TechEdU?</span>
+        <br>
+        <span class="question-link">How can I join?</span>
+        <br>
+        <span class="question-link">What is the Slack channel for?</span>
+      </div>
+    </div>
+    <div class="user-input">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById("userInput");
+      const chatArea = document.getElementById("chatArea");
+
+      const userMessage = userInput.value.trim();
+      if (!userMessage) return;
+
+      // Create a user message element
+      const userMessageDiv = document.createElement("div");
+      userMessageDiv.classList.add("chat-message");
+      userMessageDiv.textContent = userMessage;
+      chatArea.appendChild(userMessageDiv);
+
+      // Clear the user input field
+      userInput.value = "";
+
+      // Bot response based on user input
+      setTimeout(() => {
+        const botMessageDiv = document.createElement("div");
+        botMessageDiv.classList.add("chat-message", "bot");
+
+        switch (userMessage.toLowerCase()) {
+          case "hello":
+            botMessageDiv.textContent = "Hi there! How can I help you today?";
+            break;
+          case "what is techedu?":
+            botMessageDiv.textContent = "TechEdU is a place to learn about tech.";
+            break;
+          case "how can i join?":
+            botMessageDiv.textContent = "You can join by signing up on our website.";
+            break;
+          case "what is the slack channel for?":
+            botMessageDiv.textContent = "The Slack channel is to connect with others, discuss topics of interest, and share your innovations.";
+            break;
+          default:
+            const randomResponses = [
+              "You can fill the contact form we will get back ASAP.",
+              "Sorry, I don't have an answer for that.",
+              "Interesting! Tell me more.",
+              "I'm still learning. Can you rephrase that?",
+              "I'm not quite sure what you mean. Can you be more specific?",
+              "Let's talk about something else!",
+            ];
+            const randomIndex = Math.floor(Math.random() * randomResponses.length);
+            botMessageDiv.textContent = randomResponses[randomIndex];
+            break;
+        }
+
+        chatArea.appendChild(botMessageDiv);
+
+        // Scroll to the bottom of the chat area to show the latest message
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }, 500);
+    }
+
+    // Event listener to handle user clicks on question links
+    document.getElementById("chatArea").addEventListener("click", function(event) {
+      if (event.target.classList.contains("question-link")) {
+        const question = event.target.textContent.trim();
+        switch (question.toLowerCase()) {
+          case "what is techedu?":
+            displayAnswer("TechEdU is a place to learn about tech.");
+            break;
+          case "how can i join?":
+            displayAnswer("You can join by signing up on our website.");
+            break;
+          case "what is the slack channel for?":
+            displayAnswer("The Slack channel is to connect with others, discuss topics of interest, and share your innovations.");
+            break;
+          default:
+            displayAnswer("For more info Fill the contact form we will reach out to you ASAP.");
+            break;
+        }
+      }
+    });
+
+    // Function to display answers
+    function displayAnswer(answer) {
+      const botMessageDiv = document.createElement("div");
+      botMessageDiv.classList.add("chat-message", "bot");
+      botMessageDiv.textContent = answer;
+      chatArea.appendChild(botMessageDiv);
+
+      // Scroll to the bottom of the chat area to show the latest message
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+  </script>
+</body>
+
+</html>

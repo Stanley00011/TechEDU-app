@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            max-width: 600px;
+        }
+
+        .quiz-container {
+            background-color: darkblue;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        #question-container {
+            margin-top: 20px;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: grey;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #004080;
+        }
+
+        /* Center the submit button */
+        #submit-btn {
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="quiz-container">
+            <h1>Tech Quiz</h1>
+            <div id="question-container">
+                <p id="question"></p>
+                <div id="options"></div>
+            </div>
+            <button id="submit-btn" onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+            <p id="score"></p>
+            <p id="timer"></p> <!-- Added to display the timer -->
+        </div>
+
+        <footer>
+            &copy; Tech edu 2023
+        </footer>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "What does HTML stand for?",
+                options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+                answer: "Hyper Text Markup Language"
+            },
+            {
+                question: "Which programming language is often used for web development?",
+                options: ["Java", "Python", "JavaScript"],
+                answer: "JavaScript"
+            },
+            {
+                question: "What does CSS stand for?",
+                options: ["Colorful Style Sheets", "Cascading Style Sheets", "Computer Style Sheets"],
+                answer: "Cascading Style Sheets"
+            },
+            {
+                question: "What is the capital city of Japan?",
+                options: ["Shanghai", "Beijing", "Tokyo"],
+                answer: "Tokyo"
+            },
+            {
+                question: "What does CPU stand for?",
+                options: ["Central Processing Unit", "Computer Personal Unit", "Central Personal Unit"],
+                answer: "Central Processing Unit"
+            },
+            {
+                question: "Which company developed the Android operating system?",
+                options: ["Apple", "Google", "Microsoft"],
+                answer: "Google"
+            },
+            {
+                question: "What is the full form of URL?",
+                options: ["Uniform Resource Locator", "Universal Resource Link", "Uniform Resource Link"],
+                answer: "Uniform Resource Locator"
+            },
+            {
+                question: "Which language is used for styling web pages?",
+                options: ["HTML", "CSS", "JavaScript"],
+                answer: "CSS"
+            },
+            {
+                question: "What is the largest planet in our solar system?",
+                options: ["Jupiter", "Saturn", "Earth"],
+                answer: "Jupiter"
+            },
+            {
+                question: "Which social media platform was founded by Mark Zuckerberg?",
+                options: ["Twitter", "Instagram", "Facebook"],
+                answer: "Facebook"
+            }
+            // Add 10 more questions here
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let startTime = null;
+        let timerInterval;
+
+        function startTimer() {
+            startTime = new Date().getTime();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const currentTime = new Date().getTime();
+            const timeElapsed = currentTime - startTime;
+            const seconds = Math.floor(timeElapsed / 1000);
+            document.getElementById("timer").textContent = `Time: ${seconds} seconds`;
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const submitButton = document.getElementById("submit-btn");
+            const feedbackElement = document.getElementById("feedback");
+
+            if (currentQuestion < quizQuestions.length) {
+                questionElement.textContent = quizQuestions[currentQuestion].question;
+                optionsElement.innerHTML = "";
+
+                for (let i = 0; i < quizQuestions[currentQuestion].options.length; i++) {
+                    const option = document.createElement("input");
+                    option.type = "radio";
+                    option.name = "option";
+                    option.value = quizQuestions[currentQuestion].options[i];
+                    optionsElement.appendChild(option);
+
+                    const optionLabel = document.createElement("label");
+                    optionLabel.textContent = quizQuestions[currentQuestion].options[i];
+                    optionLabel.setAttribute("for", option.value); // Added for attribute to link labels with corresponding inputs
+                    optionsElement.appendChild(optionLabel);
+
+                    optionsElement.appendChild(document.createElement("br"));
+                }
+
+                submitButton.style.display = "block";
+                feedbackElement.textContent = "";
+                document.getElementById("score").textContent = `Score: ${score}/${currentQuestion}`;
+                // Start the timer when the first question is displayed
+                if (currentQuestion === 0) {
+                    startTimer();
+                }
+            } else {
+                questionElement.textContent = "Quiz completed!";
+                optionsElement.innerHTML = "";
+                submitButton.style.display = "none";
+                feedbackElement.textContent = "";
+                document.getElementById("score").textContent = `Final Score: ${score}/${quizQuestions.length}`;
+                stopTimer();
+            }
+        }
+
+        function checkAnswer() {
+            const options = document.getElementsByName("option");
+            let selectedOption;
+
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedOption = options[i].value;
+                    break;
+                }
+            }
+
+            if (!selectedOption) {
+                document.getElementById("feedback").textContent = "Please select an option.";
+                return;
+            }
+
+            if (selectedOption === quizQuestions[currentQuestion].answer) {
+                score++;
+            }
+
+            currentQuestion++;
+            displayQuestion();
+        }
+
+        displayQuestion();
+    </script>
+</body>
+
+</html>

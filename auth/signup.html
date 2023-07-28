@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechEdu Auth</title>
+  <link rel="stylesheet" href="./../css/styleo.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+</head>
+
+<body>
+  <div id="leftmg">
+    <div class="left">
+      <img src="./../images\fang-wei-lin-H1IRUS1vEFA-unsplash.jpg" alt="book">
+    </div>
+  </div>
+
+  <div id="login-box">
+    <div class="right">
+      <h1>Sign Up</h1>
+      <form id="signup">
+        <input type="text" name="name" placeholder="eneter your name" maxlength="50" required class="box">
+        <input type="email" name="email" placeholder="enter your email"  required class="box">
+        <input type="password" name="pass" placeholder="enter your password" maxlength="20" required class="box">
+        <input type="password" name="cpass" placeholder="confirm your password" maxlength="20" required class="box">
+        <input type="file" name="image" accept="image/*" required class="box">
+        <input type="hidden" name="role" value="student">
+
+        <input type="submit" id="SignUp" name="signup_submit" value="Sign Up" />
+      </form>
+      <p>Already have an account? <a href="signin.html">Sign In</a></p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./../js/main.js"></script>
+</body>
+
+</html>

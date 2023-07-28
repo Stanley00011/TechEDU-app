@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Tech Learning Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://wpvip.edutopia.org/wp-content/uploads/2022/10/weissberg-durlak-selessentialforstus.jpg?w=2880&quality=85'); 
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+        }
+       
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            background-color: rgba(0, 128, 0, 0.7); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        button {
+            background-color: #00008b; /* Dark blue button */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0000cd; /* Darker blue on hover */
+        }
+
+        /* Styles for the subscription form */
+.subscription-form {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+input {
+    width: 100%;
+    padding: 1px;
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #00008b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0000cd;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Tech Learning Facts</h1>
+        <p id="factDisplay">Click the button to learn something new!</p>
+        <button id="factButton">Generate Fact</button>
+
+         <!-- Subscription Form -->
+         <form id="subscriptionForm" action="subscribe.php" method="post" class="subscription-form">
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Subscribe</button>
+            </div>
+        </form>
+
+    </div>
+    
+   
+
+    <script>
+        // Array containing random tech learning facts
+        const techFacts = [
+            "The first computer mouse was invented by Doug Engelbart in 1964 and was made of wood.",
+            "The first programming language was Fortran, developed in the 1950s.",
+            "The world's first website was created by Sir Tim Berners-Lee in 1991.",
+            "The QWERTY keyboard layout was designed to slow typists down and prevent typewriter jams.",
+            "The Android operating system was founded by Andy Rubin, Rich Miner, Nick Sears, and Chris White in 2003.",
+            "The first gigabyte hard drive was developed by IBM in 1980 and weighed over 500 pounds.",
+            "The first video game, 'Tennis for Two,' was created in 1958 by physicist William Higinbotham.",
+            "The '@' symbol was used to signify email addresses because it was unlikely to appear in anyone's name.",
+            "The world's first commercial text message was sent in 1992 and read 'Merry Christmas.'",
+            "The first computer virus was called 'Creeper' and was created in 1971.",
+      "The term 'bug' in computer science originated from a real bug (moth) that caused a malfunction in the Harvard Mark II computer in 1947.",
+    "The world's first computer programmer was Ada Lovelace, who wrote the first algorithm for Charles Babbage's Analytical Engine in the 1840s.",
+    "The first domain name ever registered was symbolics.com on March 15, 1985.",
+    "The first Apple computer, the Apple I, was sold for $666.66 in 1976.",
+    "The first webcam was invented at the University of Cambridge to monitor a coffee pot.",
+    "The term 'Wi-Fi' doesn't stand for anything; it is a trademarked term by the Wi-Fi Alliance.",
+    "The first mobile phone call was made by Martin Cooper in 1973 using a Motorola DynaTAC phone.",
+    "The world's first hard disk drive was the IBM 350 Disk File, introduced in 1956 and had a capacity of 3.75 MB.",
+    "The first graphical web browser was called Mosaic and was released in 1993.",
+    "The first emoji was created in 1999 by Shigetaka Kurita, a Japanese engineer.",
+    "The world's first 1TB (terabyte) hard drive was released in 2007.",
+    "The first computer to defeat a human in chess was IBM's Deep Blue, which defeated Garry Kasparov in 1997.",
+    "The first YouTube video was uploaded on April 23, 2005, titled 'Me at the zoo.'",
+    "The term 'hack' originated from MIT students in the 1950s, referring to an elegant or clever solution to a problem.",
+    "The first 1GB (gigabyte) SD card was introduced in 2000.",
+    "The world's first computer animation was created by Edward E. Zajac in 1950.",
+    "The first 3D printer was created in 1983 by Chuck Hull and used a process called stereolithography.",
+    "The first text message (SMS) was sent in 1992, with the content 'Merry Christmas.'",
+    "The first computer game was created in 1961 and called Spacewar!",
+        ];
+
+        // Function to generate and display a random tech learning fact
+        function generateRandomTechFact() {
+            const factDisplay = document.getElementById("factDisplay");
+            const randomIndex = Math.floor(Math.random() * techFacts.length);
+            factDisplay.textContent = techFacts[randomIndex];
+        }
+
+        // Attach event listener to the button
+        const factButton = document.getElementById("factButton");
+        factButton.addEventListener("click", generateRandomTechFact);
+    </script>
+</body>
+</html>
