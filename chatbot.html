@@ -108,16 +108,14 @@
       const userMessage = userInput.value.trim();
       if (!userMessage) return;
 
-      // Create a user message element
       const userMessageDiv = document.createElement("div");
       userMessageDiv.classList.add("chat-message");
       userMessageDiv.textContent = userMessage;
       chatArea.appendChild(userMessageDiv);
 
-      // Clear the user input field
+      
       userInput.value = "";
 
-      // Bot response based on user input
       setTimeout(() => {
         const botMessageDiv = document.createElement("div");
         botMessageDiv.classList.add("chat-message", "bot");

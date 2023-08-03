@@ -7,17 +7,17 @@
   <div id="jobBoardContainer"></div>
 
   <script>
-    // Replace 'YOUR_API_KEY' with the actual API key
+    
     const apiKey = 'YOUR_API_KEY';
-    const apiUrl = 'https://api.example.com/jobs'; // Replace with the API endpoint URL
+    const apiUrl = 'https://api.example.com/jobs'; 
 
-    // Function to fetch job board data and display it
+   
     async function fetchJobData() {
       try {
         const response = await fetch(`${apiUrl}?api_key=${apiKey}`);
         const data = await response.json();
         
-        // Assuming the API returns an array of job objects with properties like 'title', 'company', 'location', etc.
+       
         const jobBoardContainer = document.getElementById('jobBoardContainer');
         
         data.forEach(job => {
