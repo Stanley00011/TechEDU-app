@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 <?php
-           // Replace 'YOUR_SLACK_API_KEY' with your actual Slack API key
-$slackApiKey = 'YOUR_SLACK_API_KEY';
+        
+$slackApiKey = 'SLACK_API_KEY';
 
 
 function sendMessageToSlack($message) {
