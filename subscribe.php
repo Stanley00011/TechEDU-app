@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Display job listings
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo '<div class="job-listing">';
+                echo '<div class="job-listingg">';
                 echo '<h2>' . $row['title'] . '</h2>';
                 echo '<p>Company: ' . $row['company'] . '</p>';
                 echo '<p>Location: ' . $row['location'] . '</p>';
