@@ -47,11 +47,7 @@ function sendMessageToSlack($message) {
         "channel" => $channel
     );
 
-    $headers = array(
-        "Authorization: Bearer " . $slackApiKey;
-        "Content-Type: application/json"
-    );
-
+  
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $slackUrl);
     curl_setopt($ch, CURLOPT_POST, 1);
