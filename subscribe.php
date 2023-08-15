@@ -14,24 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-<?php
-        // Display job listings
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<div class="job-listingg">';
-                echo '<h2>' . $row['title'] . '</h2>';
-                echo '<p>Company: ' . $row['company'] . '</p>';
-                echo '<p>Location: ' . $row['location'] . '</p>';
-                
-                echo '</div>';
-            }
-        } else {
-            echo 'No job listings available.';
-        }
-
-        
-        $conn->close();
-        ?>
 
 
 <?php
