@@ -61,6 +61,7 @@ if(isset($_POST['tutor_fetch'])){
 <?php include 'components/user_header.php'; ?>
 
 <!-- teachers profile section starts  -->
+<!-- teachers profile section starts  -->
 
 <section class="tutor-profile">
 
